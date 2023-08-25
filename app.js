@@ -4,13 +4,17 @@ const readline = require('readline');
 const fs = require('fs');
 const filePath = './results/results.txt';
 const WebSocket = require('ws');
-const http = require('http');
+const https = require('https');
 var content = "";
 
 const app = express();
 const port = 3000; // You can change the port if needed
 
-const server = http.createServer(app);
+// const server = http.createServer(app);
+const server = https.createServer({
+  cert: fs.readFileSync('./cert/cert.pem'),
+  key: fs.readFileSync('./cert/key.pem')
+}, app);
 
 const wss = new WebSocket.Server({ server });
 
@@ -32,7 +36,7 @@ app.get('/', (req, res) => {
             alert(result);
           }
 
-          const ws = new WebSocket('ws://bulk-url-tester.onrender.com:3000');
+          const ws = new WebSocket('wss://localhost:3000');
 
           ws.addEventListener('open', (event) => {
             console.log('WebSocket connection opened.');
