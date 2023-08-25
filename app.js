@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
             alert(result);
           }
 
-          const ws = new WebSocket('wss://localhost:5000');
+          const ws = new WebSocket('wss://easy-rose-angler-kit.cyclic.cloud:5000');
 
           ws.addEventListener('open', (event) => {
             console.log('WebSocket connection opened.');
