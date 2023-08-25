@@ -8,7 +8,7 @@ const http = require('http');
 var content = "";
 
 const app = express();
-const port = 3000; // You can change the port if needed
+const port = 5000; // You can change the port if needed
 
 const server = http.createServer(app);
 
@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
             alert(result);
           }
 
-          const ws = new WebSocket('ws://localhost:3000');
+          const ws = new WebSocket('ws://localhost:5000');
 
           ws.addEventListener('open', (event) => {
             console.log('WebSocket connection opened.');
@@ -98,7 +98,7 @@ async function runChecker(ws) {
 //   console.log(`App listening at http://localhost:${port}`);
 // });
 
-server.listen(port, () => {
+server.listen(process.env.PORT || port, () => {
     console.log(`App listening at http://localhost:${port}`);
 });
 
