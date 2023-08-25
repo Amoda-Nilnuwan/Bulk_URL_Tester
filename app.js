@@ -8,7 +8,7 @@ const https = require('https');
 var content = "";
 
 const app = express();
-const port = 3000; // You can change the port if needed
+const port = 10000; // You can change the port if needed
 
 // const server = http.createServer(app);
 const server = https.createServer({
@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
             alert(result);
           }
 
-          const ws = new WebSocket('wss://bulk-url-tester.onrender.com:3000');
+          const ws = new WebSocket('wss://${window.location.host}:10000');
 
           ws.addEventListener('open', (event) => {
             console.log('WebSocket connection opened.');
