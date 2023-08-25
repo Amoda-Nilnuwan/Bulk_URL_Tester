@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
   res.send(`
     <html>
       <body>
-        <h1>Web Page Speed Checker</h1>
+        <h1>Web Page Speed Checker 2</h1>
         <div id="dataDisplay"></div>
         <textarea id="inputData" rows="10" cols="80" placeholder="enter your URL's"></textarea>
         <button onclick="runCode()">Check Speed</button>
