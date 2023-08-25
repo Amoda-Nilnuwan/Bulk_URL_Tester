@@ -4,13 +4,13 @@ const readline = require('readline');
 const fs = require('fs');
 const filePath = './results/results.txt';
 const WebSocket = require('ws');
-const http = require('http');
+const https = require('https');
 var content = "";
 
 const app = express();
 const port = 5000; // You can change the port if needed
 
-const server = http.createServer(app);
+const server = https.createServer(app);
 
 const wss = new WebSocket.Server({ server });
 
@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
   res.send(`
     <html>
       <body>
-        <h1>Web Page Speed Checker 2</h1>
+        <h1>Web Page Speed Checker 3</h1>
         <div id="dataDisplay"></div>
         <textarea id="inputData" rows="10" cols="80" placeholder="enter your URL's"></textarea>
         <button onclick="runCode()">Check Speed</button>
@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
             alert(result);
           }
 
-          const ws = new WebSocket('ws://easy-rose-angler-kit.cyclic.cloud:5000');
+          const ws = new WebSocket('wss://localhost:5000');
 
           ws.addEventListener('open', (event) => {
             console.log('WebSocket connection opened.');
@@ -99,7 +99,7 @@ async function runChecker(ws) {
 // });
 
 server.listen(process.env.PORT || port, () => {
-    console.log(`App listening at http://localhost:${port}`);
+    console.log(`App listening at https://localhost:${port}`);
 });
 
 function readLinesToArray(filePath) {
