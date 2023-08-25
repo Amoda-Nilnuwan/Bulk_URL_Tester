@@ -4,13 +4,13 @@ const readline = require('readline');
 const fs = require('fs');
 const filePath = './results/results.txt';
 const WebSocket = require('ws');
-const https = require('https');
+const http = require('http');
 var content = "";
 
 const app = express();
-const port = 5000; // You can change the port if needed
+const port = 3000; // You can change the port if needed
 
-const server = https.createServer(app);
+const server = http.createServer(app);
 
 const wss = new WebSocket.Server({ server });
 
@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
             alert(result);
           }
 
-          const ws = new WebSocket('wss://easy-rose-angler-kit.cyclic.cloud:5000');
+          const ws = new WebSocket('ws://localhost:3000');
 
           ws.addEventListener('open', (event) => {
             console.log('WebSocket connection opened.');
