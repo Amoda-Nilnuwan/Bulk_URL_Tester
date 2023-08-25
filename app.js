@@ -37,7 +37,7 @@ app.get('/', (req, res) => {
             alert(result);
           }
 
-          const ws = new WebSocket('ws://localhost:10000');
+          const ws = new WebSocket('ws://0.0.0.0:10000');
 
           ws.addEventListener('open', (event) => {
             console.log('WebSocket connection opened.');
