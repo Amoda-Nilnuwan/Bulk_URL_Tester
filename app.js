@@ -98,7 +98,7 @@ async function runChecker(ws) {
 //   console.log(`App listening at http://localhost:${port}`);
 // });
 
-server.listen(port, () => {
+server.listen(process.env.PORT || port, () => {
     console.log(`App listening at http://localhost:${port}`);
 });
 
