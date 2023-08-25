@@ -37,7 +37,7 @@ app.get('/', (req, res) => {
             alert(result);
           }
 
-          const ws = new WebSocket('wss://bulk-url-tester:10000');
+          const ws = new WebSocket('ws://localhost:10000');
 
           ws.addEventListener('open', (event) => {
             console.log('WebSocket connection opened.');
@@ -104,7 +104,7 @@ async function runChecker(ws) {
 // });
 
 server.listen(process.env.PORT || port, () => {
-    console.log(`App ${process.env.PORT} listening at https://localhost:${port}`);
+    console.log(`App ${process.env.PORT || port} listening at https://localhost:${port}`);
 });
 
 function readLinesToArray(filePath) {
