@@ -5,16 +5,17 @@ const fs = require('fs');
 const filePath = './results/results.txt';
 const WebSocket = require('ws');
 const https = require('https');
+const http = require('http');
 var content = "";
 
 const app = express();
 const port = 10000; // You can change the port if needed
 
-// const server = http.createServer(app);
-const server = https.createServer({
-  cert: fs.readFileSync('./cert/cert.pem'),
-  key: fs.readFileSync('./cert/key.pem')
-}, app);
+const server = http.createServer(app);
+// const server = https.createServer({
+//   cert: fs.readFileSync('./cert/cert.pem'),
+//   key: fs.readFileSync('./cert/key.pem')
+// }, app);
 
 const wss = new WebSocket.Server({ server });
 
