@@ -37,7 +37,7 @@ app.get('/', (req, res) => {
             alert(result);
           }
 
-          const ws = new WebSocket('wss://' + window.location.host + ':10000');
+          const ws = new WebSocket('wss://bulk-url-tester:10000');
 
           ws.addEventListener('open', (event) => {
             console.log('WebSocket connection opened.');
