@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
             alert(result);
           }
 
-          const ws = new WebSocket('ws://localhost:3000');
+          const ws = new WebSocket('ws://bulk-url-tester.onrender.com:3000');
 
           ws.addEventListener('open', (event) => {
             console.log('WebSocket connection opened.');
