@@ -163,7 +163,7 @@ function readLinesToArray(filePath) {
           const mobile_performance  = await page.$eval(combinedSelector, div => div.textContent);
           console.log('Mobile Performance :', mobile_performance);
           ws.send('Mobile Performance :' + mobile_performance);
-          await page.screenshot({path: `/app/results/${index+1}_Mobile.png`});
+          await page.screenshot({path: `./results/${index+1}_Mobile.png`});
 
           const desktopTab          = await page.$('#desktop_tab');
           await desktopTab.click();
