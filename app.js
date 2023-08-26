@@ -37,8 +37,9 @@ app.get('/', (req, res) => {
             const result = await response.text();
             alert(result);
           }
-
-          const ws = new WebSocket('wss://bulk-url-tester.onrender.com');
+          
+          const ws = new WebSocket('wss://unusual-dog-knickers.cyclic.cloud');
+          // const ws = new WebSocket('wss://bulk-url-tester.onrender.com');
 
           ws.addEventListener('open', (event) => {
             console.log('WebSocket connection opened.');
