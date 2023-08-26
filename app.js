@@ -1,5 +1,6 @@
 const express = require('express');
 const puppeteer = require('puppeteer');
+require("dotenv").config();
 const readline = require('readline');
 const fs = require('fs');
 const filePath = './results/results.txt';
@@ -132,7 +133,18 @@ function readLinesToArray(filePath) {
 
  async function check_speed(linesArray,ws){
     try {
-        const browser = await puppeteer.launch();
+        const browser = await puppeteer.launch({
+          args: [
+            "--disable-setuid-sandbox",
+            "--no-sandbox",
+            "--single-process",
+            "--no-zygote",
+          ],
+          executablePath: 
+            process.env.NODE_ENV === "production"
+              ? process.env.PUPPETEER_EXECUTABLE_PATH
+              : puppeteer.executablePath(),
+        });
 
         for (let index = 0; index < linesArray.length; index++) {
           const url = linesArray[index];
