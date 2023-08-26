@@ -37,8 +37,9 @@ app.get('/', (req, res) => {
             const result = await response.text();
             alert(result);
           }
-          
-          const ws = new WebSocket('wss://ill-pear-coral-tam.cyclic.cloud/');
+
+          const ws = new WebSocket('ws://localhost:${process.env.PORT || port}');
+          // const ws = new WebSocket('wss://ill-pear-coral-tam.cyclic.cloud:3000');
           // const ws = new WebSocket('wss://bulk-url-tester.onrender.com');
 
           ws.addEventListener('open', (event) => {
@@ -48,6 +49,36 @@ app.get('/', (req, res) => {
           ws.addEventListener('message', (event) => {
             const dataDisplay = document.getElementById('dataDisplay');
             dataDisplay.innerHTML = dataDisplay.innerHTML + '<br>' + event.data;
+
+            const jsonData = JSON.parse(event.data);
+
+            if (jsonData.type === 'image') {
+              const screenshotBase64 = jsonData.data;
+          
+              // Convert base64 to binary
+              const screenshotBuffer = new Uint8Array(atob(screenshotBase64).split('').map(char => char.charCodeAt(0)));
+
+              const screenshotBlob = new Blob([screenshotBuffer], { type: 'image/png' });
+              const screenshotUrl = URL.createObjectURL(screenshotBlob);
+              const downloadLink = document.createElement('a');
+              downloadLink.href = screenshotUrl;
+              downloadLink.download = 'screenshot.png'; // Set the desired filename
+              downloadLink.textContent = 'Download Screenshot';
+              document.body.appendChild(downloadLink);
+              downloadLink.click();
+
+            }
+
+            // const screenshotBuffer = event.data;
+            // const screenshotBlob = new Blob([screenshotBuffer], { type: 'image/png' });
+            // const screenshotUrl = URL.createObjectURL(screenshotBlob);
+            // const downloadLink = document.createElement('a');
+            // downloadLink.href = screenshotUrl;
+            // downloadLink.download = 'screenshot.png'; // Set the desired filename
+            // downloadLink.textContent = 'Download Screenshot';
+            // document.body.appendChild(downloadLink);
+            // downloadLink.click();
+
           });
 
           function sendData() {
@@ -164,7 +195,28 @@ function readLinesToArray(filePath) {
           const mobile_performance  = await page.$eval(combinedSelector, div => div.textContent);
           console.log('Mobile Performance :', mobile_performance);
           ws.send('Mobile Performance :' + mobile_performance);
-          await page.screenshot({path: `./results/${index+1}_Mobile.png`});
+          //await page.screenshot({path: `./results/${index+1}_Mobile.png`});
+
+          // const screenshotBuffer = await page.screenshot({ encoding: 'binary' });
+          // const screenshot = await page.screenshot({ type: "png" });
+          // const screenshotData = screenshot.toString("base64");
+
+          // ws.send(screenshotData);
+
+          const screenshotBuffer = await page.screenshot({ encoding: 'binary' });
+
+          // ws.send(screenshotBuffer, { binary: true });
+          const screenshotBase64 = screenshotBuffer.toString('base64');
+          ws.send(JSON.stringify({ type: 'image', data: screenshotBase64 }));
+
+          // const payload = {
+          //   type: 'image',
+          //   data: screenshotData,
+          // };
+      
+          // ws.send(JSON.stringify(payload));
+
+
 
           const desktopTab          = await page.$('#desktop_tab');
           await desktopTab.click();
