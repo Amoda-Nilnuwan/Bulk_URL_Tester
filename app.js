@@ -83,7 +83,7 @@ wss.on('connection', (ws) => {
   //     const randomData = Math.random();
   //     ws.send(randomData.toString()); // Send data to the client
   //   }, 2000);
-  // });
+  });
 
 async function runChecker(ws) {
 
