@@ -38,9 +38,9 @@ app.get('/', (req, res) => {
             alert(result);
           }
 
-          const ws = new WebSocket('ws://localhost:${process.env.PORT || port}');
+          // const ws = new WebSocket('ws://localhost:${process.env.PORT || port}');
           // const ws = new WebSocket('wss://ill-pear-coral-tam.cyclic.cloud:3000');
-          // const ws = new WebSocket('wss://bulk-url-tester.onrender.com');
+          const ws = new WebSocket('wss://bulk-url-tester.onrender.com');
 
           ws.addEventListener('open', (event) => {
             console.log('WebSocket connection opened.');
