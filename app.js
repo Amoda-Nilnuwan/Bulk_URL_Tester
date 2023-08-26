@@ -78,10 +78,10 @@ wss.on('connection', (ws) => {
         }
       });
     // Simulate sending data to the client
-    // setInterval(() => {
-    //   const randomData = Math.random();
-    //   ws.send(randomData.toString()); // Send data to the client
-    // }, 2000);
+    setInterval(() => {
+      const randomData = Math.random();
+      ws.send(randomData.toString()); // Send data to the client
+    }, 2000);
   });
 
 async function runChecker(ws) {
