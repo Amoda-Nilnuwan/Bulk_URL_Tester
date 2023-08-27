@@ -229,8 +229,12 @@ function readLinesToArray(filePath) {
           const desktop_perfomance  = await page.$eval(combinedSelector2, div => div.textContent);
           console.log('Desktop Performance :', desktop_perfomance);
           ws.send('Desktop Performance :' + desktop_perfomance);
-          await page.screenshot({path: `./results/${index+1}_Desktop.png`});
+          // await page.screenshot({path: `./results/${index+1}_Desktop.png`});
+          const screenshotBuffer2 = await page.screenshot({ encoding: 'binary' });
 
+          // ws.send(screenshotBuffer, { binary: true });
+          const screenshotBase642 = screenshotBuffer2.toString('base64');
+          ws.send(JSON.stringify({ type: 'image', data: screenshotBase642 }));
 
           content = content + `${mobile_performance}\t${desktop_perfomance}\n`;
           fs.writeFile(filePath, content, (err) => {
